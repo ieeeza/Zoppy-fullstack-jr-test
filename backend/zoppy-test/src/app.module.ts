@@ -1,8 +1,6 @@
 import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { Cliente } from "./entities/cliente.entity";
+import { ClientesModule } from "./clientes/clientes.module";
 
 @Module({
   imports: [
@@ -13,12 +11,12 @@ import { Cliente } from "./entities/cliente.entity";
       username: "postgres",
       password: "Cesar1234.",
       database: "zoppy",
-      entities: [Cliente],
+      entities: [__dirname + "/**/*.entity{.ts,.js}"],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Cliente]),
+    ClientesModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

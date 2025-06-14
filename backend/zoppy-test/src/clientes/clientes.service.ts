@@ -1,12 +1,16 @@
-import { Cliente } from "./entities/cliente.entity";
-import { ConflictException, Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { CriarClienteDto } from "./dtos/criar-cliente.dto";
-import { AtualizarClienteDto } from "./dtos/atualizar-cliente.dto";
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
+import { Cliente } from "src/entities/cliente.entity";
+import { CriarClienteDto } from "src/dtos/criar-cliente.dto";
+import { AtualizarClienteDto } from "src/dtos/atualizar-cliente.dto";
 import { Repository } from "typeorm";
+import { InjectRepository } from "@nestjs/typeorm";
 
 @Injectable()
-export class AppService {
+export class ClientesService {
   constructor(
     @InjectRepository(Cliente)
     private readonly clienteRepository: Repository<Cliente>,
@@ -21,7 +25,7 @@ export class AppService {
       throw new ConflictException("Email ja cadastrado!");
     }
 
-    const novoCliente = this.clienteRepository.create(criarClienteDto);
+    const novoCliente = this.clienteRepository.create({ ...criarClienteDto });
 
     return await this.clienteRepository.save(novoCliente);
   }
@@ -36,9 +40,7 @@ export class AppService {
   ): Promise<Cliente | null> {
     const cliente = await this.clienteRepository.findOne({ where: { id } });
 
-    if (!cliente) {
-      return null;
-    }
+    if (!cliente) return null;
 
     if (
       atualizarClienteDto.email &&
@@ -55,5 +57,14 @@ export class AppService {
     Object.assign(cliente, atualizarClienteDto);
 
     return await this.clienteRepository.save(cliente);
+  }
+
+  async apagarCliente(id: string): Promise<void> {
+    const cliente = await this.clienteRepository.findOne({ where: { id } });
+
+    if (!cliente)
+      throw new NotFoundException(`Cliente com id "${id}" não encontrado`);
+
+    await this.clienteRepository.remove(cliente);
   }
 }
