@@ -2,7 +2,7 @@ import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 
 export class CriarClienteDto {
   @IsNotEmpty({ message: "Digite um nome para o cliente!" })
-  @IsString({ message: "Formato de dado onválido!" })
+  @IsString({ message: "Formato de dado inválido!" })
   nome: string;
 
   @IsNotEmpty({ message: "Digite um email para o cliente!" })

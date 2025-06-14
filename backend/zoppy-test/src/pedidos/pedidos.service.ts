@@ -21,6 +21,10 @@ export class PedidosService {
     return this.pedidoRepository.save(novoPedido);
   }
 
+  async listarPedidos(): Promise<Pedido[]> {
+    return await this.pedidoRepository.find();
+  }
+
   async atualizarPedido(
     id: string,
     atualizarPedidoDto: AtualizarPedidoDto,

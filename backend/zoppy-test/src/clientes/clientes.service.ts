@@ -4,8 +4,8 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import { Cliente } from "src/entities/cliente.entity";
-import { CriarClienteDto } from "src/dtos/criar-cliente.dto";
-import { AtualizarClienteDto } from "src/dtos/atualizar-cliente.dto";
+import { CriarClienteDto } from "src/dtos/clientesDto/criar-cliente.dto";
+import { AtualizarClienteDto } from "src/dtos/clientesDto/atualizar-cliente.dto";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 

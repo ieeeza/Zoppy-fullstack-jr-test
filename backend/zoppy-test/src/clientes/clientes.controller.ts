@@ -8,9 +8,9 @@ import {
   Param,
   NotFoundException,
 } from "@nestjs/common";
-import { CriarClienteDto } from "../dtos/criar-cliente.dto";
+import { CriarClienteDto } from "../dtos/clientesDto/criar-cliente.dto";
 import { Cliente } from "../entities/cliente.entity";
-import { AtualizarClienteDto } from "../dtos/atualizar-cliente.dto";
+import { AtualizarClienteDto } from "../dtos/clientesDto/atualizar-cliente.dto";
 import { ClientesService } from "./clientes.service";
 
 @Controller("clientes")
@@ -50,9 +50,9 @@ export class ClientesController {
     return clienteAtualizado;
   }
 
-  @Post(":id")
+  @Post("deletar/:id")
   @HttpCode(HttpStatus.NO_CONTENT)
-  async apagarCliente(@Param("id") id: string): Promise<void> {
+  async ApagarCliente(@Param("id") id: string): Promise<void> {
     await this.clientesService.apagarCliente(id);
   }
 }
