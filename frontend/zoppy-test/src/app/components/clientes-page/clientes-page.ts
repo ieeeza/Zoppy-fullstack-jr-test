@@ -1,100 +1,131 @@
 import { Component, OnInit } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { HttpClient } from "@angular/common/http";
 
 interface Cliente {
   id: string;
   nome: string;
+  email: string;
+  numero: string;
 }
 
 @Component({
   selector: "app-clientes-page",
-  standalone: true,
   imports: [CommonModule, FormsModule],
+  standalone: true,
   templateUrl: "./clientes-page.html",
   styleUrls: ["./clientes-page.css"],
 })
 export class ClientesPage implements OnInit {
   constructor(private readonly http: HttpClient) {}
 
+  listaDeClientes: Cliente[] = [];
+  idClienteParaAtualizar: string | null = null;
+  emailCliente: string = "";
+  nomeCliente: string = "";
+  numeroCliente: string = "";
+  isEditMode: boolean = false;
+
   ngOnInit(): void {
     this.BuscarClientes();
   }
 
-  nomeCliente: string = "";
-  emailCliente: string = "";
-  numeroCliente: string = "";
-  listaDeClientes: Cliente[] = [];
-
   BuscarClientes() {
     this.http.get<Cliente[]>("http://localhost:3000/clientes").subscribe({
-      next: (data: Cliente[]) => {
+      next: (data) => {
         this.listaDeClientes = data;
       },
-      error: (error) => {
-        alert(`Error ao buscar lista de clientes: ${error}`);
-      },
+      error: (err) => console.error("Erro ao carregar clientes:", err),
     });
   }
 
-  AtualizarCliente() {
-    
-    
-
-    this.http.get(`http://localhost:3000/clientes`).subscribe({
-      next: () => {
-        alert(`Cliente atualizado com sucesso!`);
+  AtualizarCliente(id: string) {
+    this.http.get<Cliente>(`http://localhost:3000/clientes/${id}`).subscribe({
+      next: (response) => {
+        this.idClienteParaAtualizar = response.id;
+        this.nomeCliente = response.nome;
+        this.emailCliente = response.email;
+        this.numeroCliente = response.numero;
+        this.isEditMode = true;
       },
       error: (error) => {
-        alert(`Error ao atualizar o cliente: ${error}`);
+        alert(`Erro ao buscar o cliente para edição: ${error}`);
       },
     });
   }
 
   CadastrarCliente() {
-    const clienteData = {
+    const novoCliente = {
       nome: this.nomeCliente,
       email: this.emailCliente,
       numero: this.numeroCliente,
     };
 
-    if (!this.nomeCliente || !this.emailCliente || !this.numeroCliente) {
-      alert("Preencha os campos");
+    this.http.post("http://localhost:3000/clientes", novoCliente).subscribe({
+      next: (response) => {
+        alert("Cliente cadastrado com sucesso!");
+        this.LimparFormulario();
+        this.BuscarClientes();
+      },
+      error: (error) => {
+        console.error("Erro ao cadastrar cliente:", error);
+        alert("Erro ao cadastrar cliente.");
+      },
+    });
+  }
+
+  SalvarAtualizacaoCliente() {
+    if (!this.idClienteParaAtualizar) {
+      alert("Nenhum cliente selecionado para atualização.");
       return;
     }
 
-    this.http.post("http://localhost:3000/clientes", clienteData).subscribe({
-      next: () => {
-        this.nomeCliente = "";
-        this.emailCliente = "";
-        this.numeroCliente = "";
-      },
-      error: (error) => {
-        alert("Erro ao cadastrar cliente: " + error.message);
-      },
-      complete: () => {
-        alert("Cliente cadastrado com sucesso!");
-        this.BuscarClientes();
-      },
-    });
+    const clienteAtualizado = {
+      id: this.idClienteParaAtualizar,
+      nome: this.nomeCliente,
+      email: this.emailCliente,
+      numero: this.numeroCliente,
+    };
+
+    this.http
+      .post(
+        `http://localhost:3000/clientes/${this.idClienteParaAtualizar}`,
+        clienteAtualizado,
+      )
+      .subscribe({
+        next: (response) => {
+          alert("Cliente atualizado com sucesso!");
+          this.LimparFormulario();
+          this.BuscarClientes();
+        },
+        error: (error) => {
+          console.error("Erro ao atualizar cliente:", error);
+          alert("Erro ao atualizar cliente.");
+        },
+      });
   }
 
-  confirmarDelecao(id: string, nomeCliente: string) {
-    if (confirm(`Tem certeza que deseja excluir o cliente ${nomeCliente}?`)) {
-      this.DeletarCliente(id);
-    }
+  LimparFormulario() {
+    this.idClienteParaAtualizar = null;
+    this.nomeCliente = "";
+    this.emailCliente = "";
+    this.numeroCliente = "";
+    this.isEditMode = false;
   }
 
   DeletarCliente(id: string) {
-    this.http.post(`http://localhost:3000/clientes/deletar/${id}`, {}).subscribe({
-      next: (response) => {
-        alert(`Cliente excluído com sucesso!`);
-        this.BuscarClientes();
-      },
-      error: (error) => {
-        alert(`Error ao excluir o cliente: ${error}`);
-      },
-    });
+    if (confirm(`Tem certeza que deseja excluir o cliente ${id}?`)) {
+      this.http.post(`http://localhost:3000/clientes/${id}`, {}).subscribe({
+        next: (response) => {
+          alert("Cliente excluído com sucesso!");
+          this.BuscarClientes();
+        },
+        error: (error) => {
+          console.error("Erro ao excluir cliente:", error);
+          alert(`Erro ao excluir o cliente: ${error}`);
+        },
+      });
+    }
   }
 }

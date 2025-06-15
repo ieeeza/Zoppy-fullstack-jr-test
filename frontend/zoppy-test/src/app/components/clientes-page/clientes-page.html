@@ -1,50 +1,46 @@
-<div class="body">
-  <div>
-    <p>Cadastrar clientes</p>
-    <input
-      type="text"
-      title="nome"
-      placeholder="Nome do cliente"
-      [(ngModel)]="nomeCliente"
-    />
-    <input
-      type="text"
-      title="nome"
-      placeholder="Email do cliente"
-      [(ngModel)]="emailCliente"
-    />
-    <input
-      type="text"
-      title="nome"
-      placeholder="Número do cliente"
-      [(ngModel)]="numeroCliente"
-    />
-    <button type="button" (click)="CadastrarCliente()">
-      Cadastrar cliente
-    </button>
-  </div>
-  <div>
-    <p>Lista de clientes ativos</p>
-    <div class="clientes-container">
-      <ul *ngFor="let cliente of listaDeClientes">
-        <li>
-          <p>{{ cliente.nome }}</p>
-          <button
-            type="button"
-            title="editarCliente"
-            (click)="AtualizarCliente()"
-          >
-            Atualizar
-          </button>
-          <button
-            type="button"
-            title="deletarCliente"
-            (click)="confirmarDelecao(cliente.id, cliente.nome)"
-          >
-            Deletar
-          </button>
-        </li>
-      </ul>
+<div>
+  <h2>{{ isEditMode ? 'Editar Cliente' : 'Cadastrar Novo Cliente' }}</h2>
+  <form>
+    <div>
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" [(ngModel)]="nomeCliente" name="nome" required>
     </div>
-  </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" [(ngModel)]="emailCliente" name="email" required>
+    </div>
+    <div>
+      <label for="numero">Número:</label>
+      <input type="text" id="numero" [(ngModel)]="numeroCliente" name="numero">
+    </div>
+
+    <button type="submit" *ngIf="!isEditMode" (click)="CadastrarCliente()">Cadastrar</button>
+    <button type="button" *ngIf="isEditMode" (click)="SalvarAtualizacaoCliente()">Salvar Alterações</button>
+    <button type="button" *ngIf="isEditMode" (click)="LimparFormulario()">Cancelar Edição</button>
+  </form>
+</div>
+
+<hr>
+
+<div>
+  <h2>Lista de Clientes</h2>
+  <ul>
+    <li *ngFor="let cliente of listaDeClientes">
+      <p>{{ cliente.nome }} ({{ cliente.email }})</p>
+      <button
+        type="button"
+        title="editarCliente"
+        (click)="AtualizarCliente(cliente.id)" >
+        Editar
+      </button>
+      <button
+        type="button"
+        title="deletarCliente"
+        (click)="DeletarCliente(cliente.id)"
+      >
+        Deletar
+      </button>
+    </li>
+  </ul>
+  <p *ngIf="listaDeClientes.length === 0">Nenhum cliente cadastrado.</p>
 </div>
