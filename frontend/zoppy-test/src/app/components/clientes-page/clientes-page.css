@@ -19,3 +19,13 @@
 	border-radius: 2px;
 }
 
+.clientes-container {
+  display: flex;
+  justify-content: center;
+}
+
+.clientes-container ul li {
+  display: flex;
+  gap: 10px;
+}
+

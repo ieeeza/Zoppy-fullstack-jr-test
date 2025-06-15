@@ -24,6 +24,14 @@ export class ClientesController {
     return clientes;
   }
 
+  @Get(":id")
+  @HttpCode(HttpStatus.OK)
+  async BuscarUsuario(id: string): Promise<Cliente> {
+    const cliente = await this.clientesService.buscarCliente(id);
+
+    return cliente;
+  }
+
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async CadastrarUsuario(

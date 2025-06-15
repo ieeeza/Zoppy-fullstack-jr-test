@@ -1,12 +1,50 @@
 <div class="body">
-	<div>
-		<p>Cadastrar clientes</p>
-		<input type="text" title="nome" placeholder="Nome do cliente">
-		<input type="text" title="nome" placeholder="Email do cliente">
-		<input type="text" title="nome" placeholder="Número do cliente">
-		<button type="button" (click)="CadastrarCliente()">Cadastrar cliente</button>
-	</div>
-	<div>
-		<p>Lista de clientes ativos</p>
-	</div>
+  <div>
+    <p>Cadastrar clientes</p>
+    <input
+      type="text"
+      title="nome"
+      placeholder="Nome do cliente"
+      [(ngModel)]="nomeCliente"
+    />
+    <input
+      type="text"
+      title="nome"
+      placeholder="Email do cliente"
+      [(ngModel)]="emailCliente"
+    />
+    <input
+      type="text"
+      title="nome"
+      placeholder="Número do cliente"
+      [(ngModel)]="numeroCliente"
+    />
+    <button type="button" (click)="CadastrarCliente()">
+      Cadastrar cliente
+    </button>
+  </div>
+  <div>
+    <p>Lista de clientes ativos</p>
+    <div class="clientes-container">
+      <ul *ngFor="let cliente of listaDeClientes">
+        <li>
+          <p>{{ cliente.nome }}</p>
+          <button
+            type="button"
+            title="editarCliente"
+            (click)="AtualizarCliente()"
+          >
+            Atualizar
+          </button>
+          <button
+            type="button"
+            title="deletarCliente"
+            (click)="confirmarDelecao(cliente.id, cliente.nome)"
+          >
+            Deletar
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
