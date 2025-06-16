@@ -38,7 +38,7 @@ npm install
 
 A aplicação backend utiliza PostgreSQL. Para que o NestJS possa se conectar ao banco, edite o arquivo:
 
-backend/src/app.module.ts
+backend/zoppy-test/src/app.module.ts
 
 Altere os seguintes campos com as credenciais do seu banco local:
 
