@@ -52,7 +52,7 @@ export class ProdutosController {
   }
 
   @Post("deletar/:id")
-  @HttpCode(HttpStatus.NOT_FOUND)
+  @HttpCode(HttpStatus.NO_CONTENT)
   async apagarProduto(@Param(":id") id: string): Promise<void> {
     await this.produtosService.apagarProduto(id);
   }

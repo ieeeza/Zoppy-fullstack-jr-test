@@ -11,12 +11,6 @@ export class Pedido {
   @Column({ type: "varchar", length: 255, nullable: false })
   produto: string;
 
-  @Column({ type: "date" })
-  dataRealizado: Date;
-
-  @Column({ type: "varchar", length: 255, nullable: false })
-  dataPrevistoEntrega: string;
-
   @Column({ type: "text", nullable: true })
   descricao: string;
 }

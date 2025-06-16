@@ -1,1 +1,75 @@
-<p>pedidos-page works!</p>
+<div>
+  <div class="header">
+    <button type="button" title="voltar" routerLink="/">VOLTAR</button>
+    <h2>{{ isEditMode ? 'Editar Pedido' : 'Cadastrar Novo Pedido' }}</h2>
+  </div>
+  <form (ngSubmit)="CadastrarPedido()">
+    <div>
+      <label for="produto">Cliente:</label>
+      <select id="produto" [(ngModel)]="cliente" name="cliente" required>
+        <option [ngValue]="null" disabled>Selecione um cliente</option>
+        <option
+          *ngFor="let clientes of listaDeClientes"
+          [ngValue]="clientes.nome"
+        >
+          {{ clientes.email }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      <label for="produto">Produto:</label>
+      <select id="produto" [(ngModel)]="produto" name="produto" required>
+        <option [ngValue]="null" disabled>Selecione um produto</option>
+        <option *ngFor="let prod of listaDeProdutos" [ngValue]="prod.nome">
+          {{ prod.nome }} - R$ {{ prod.preco | number:'1.2-2' }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <label for="descricao">Descrição do Pedido:</label>
+      <textarea
+        id="descricao"
+        [(ngModel)]="descricao"
+        name="descricao"
+        required
+      ></textarea>
+    </div>
+
+    <button type="submit" *ngIf="!isEditMode">Cadastrar</button>
+    <button type="submit" *ngIf="isEditMode">Salvar Alterações</button>
+    <button type="button" *ngIf="isEditMode" (click)="LimparFormulario()">
+      Cancelar Edição
+    </button>
+  </form>
+</div>
+
+<hr />
+
+<div>
+  <h2>Lista de Pedidos</h2>
+  <ul>
+    <li *ngFor="let pedido2 of listaDePedidos">
+      <div>
+        <p><strong>Cliente:</strong> {{ pedido2.clienteEmail }}</p>
+        <p><strong>Produto:</strong> {{ pedido2.produto }}</p>
+        <p><strong>Descrição:</strong> {{ pedido2.descricao }}</p>
+      </div>
+      <button
+        type="button"
+        title="editarPedido"
+        (click)="CarregarPedidoParaEdicao(pedido2.id)"
+      >
+        Editar
+      </button>
+      <button
+        type="button"
+        title="deletarPedido"
+        (click)="DeletarPedido(pedido2.id)"
+      >
+        Deletar
+      </button>
+    </li>
+  </ul>
+  <p *ngIf="listaDePedidos.length === 0">Nenhum Pedido cadastrado.</p>
+</div>
