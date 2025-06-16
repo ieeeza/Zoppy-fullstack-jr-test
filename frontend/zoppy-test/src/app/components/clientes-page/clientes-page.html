@@ -1,5 +1,8 @@
 <div>
-  <h2>{{ isEditMode ? 'Editar Cliente' : 'Cadastrar Novo Cliente' }}</h2>
+  <div class="header">
+    <button type="button" title="voltar" routerLink="/">VOLTAR</button>
+    <h2>{{ isEditMode ? 'Editar Cliente' : 'Cadastrar Novo Cliente' }}</h2>
+  </div>
   <form>
     <div>
       <label for="nome">Nome:</label>
@@ -10,7 +13,7 @@
       <input type="email" id="email" [(ngModel)]="emailCliente" name="email" required>
     </div>
     <div>
-      <label for="numero">Número:</label>
+      <label for="numero">Número de telefone:</label>
       <input type="text" id="numero" [(ngModel)]="numeroCliente" name="numero">
     </div>
 

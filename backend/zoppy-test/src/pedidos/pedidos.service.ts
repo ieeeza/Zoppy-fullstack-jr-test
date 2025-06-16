@@ -15,7 +15,6 @@ export class PedidosService {
   async criarPedido(criarPedidoDto: CriarPedidoDto): Promise<Pedido> {
     const novoPedido = this.pedidoRepository.create({
       ...criarPedidoDto,
-      dataRealizado: new Date(),
     });
 
     return this.pedidoRepository.save(novoPedido);

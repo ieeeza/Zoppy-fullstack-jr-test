@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { RouterLink } from "@angular/router";
 
 interface Cliente {
   id: string;
@@ -12,7 +13,7 @@ interface Cliente {
 
 @Component({
   selector: "app-clientes-page",
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   standalone: true,
   templateUrl: "./clientes-page.html",
   styleUrls: ["./clientes-page.css"],
@@ -116,13 +117,13 @@ export class ClientesPage implements OnInit {
 
   DeletarCliente(id: string) {
     if (confirm(`Tem certeza que deseja excluir o cliente ${id}?`)) {
-      this.http.post(`http://localhost:3000/clientes/${id}`, {}).subscribe({
+      this.http.post(`http://localhost:3000/clientes/deletar/${id}`, {}).subscribe({
         next: (response) => {
           alert("Cliente excluído com sucesso!");
           this.BuscarClientes();
+          this.LimparFormulario();
         },
         error: (error) => {
-          console.error("Erro ao excluir cliente:", error);
           alert(`Erro ao excluir o cliente: ${error}`);
         },
       });

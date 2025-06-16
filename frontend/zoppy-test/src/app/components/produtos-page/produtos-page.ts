@@ -1,128 +1,150 @@
 import { CommonModule } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { RouterLink } from "@angular/router";
 
 interface Produto {
   id: string;
   nome: string;
-  preco: string;
+  preco: number;
   descricao: string;
 }
 
 @Component({
   selector: "app-produtos-page",
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: "./produtos-page.html",
   styleUrl: "./produtos-page.css",
 })
-export class ProdutosPage {
+export class ProdutosPage implements OnInit {
   constructor(private readonly http: HttpClient) {}
 
   listaDeProdutos: Produto[] = [];
   idProdutoParaAtualizar: string | null = null;
   nomeProduto: string = "";
-  precoProduto: string = "";
+  precoProduto: number | null = null;
   descricaoProduto: string = "";
   isEditMode: boolean = false;
 
   ngOnInit(): void {
-    this.BuscarClientes();
+    this.BuscarProdutos();
   }
 
-  BuscarClientes() {
-    this.http.get<Produto[]>("http://localhost:3000/clientes").subscribe({
+  BuscarProdutos() {
+    this.http.get<Produto[]>("http://localhost:3000/produtos").subscribe({
       next: (data) => {
-        this.listaDeClientes = data;
+        this.listaDeProdutos = data;
       },
-      error: (err) => console.error("Erro ao carregar clientes:", err),
+      error: (error) => {
+        alert(`Erro ao carregar os produtos: ${error}`);
+      },
     });
   }
 
-  AtualizarCliente(id: string) {
-    this.http.get<Cliente>(`http://localhost:3000/clientes/${id}`).subscribe({
+  CarregarProdutoParaEdicao(id: string) {
+    this.http.get<Produto>(`http://localhost:3000/produtos/${id}`).subscribe({
       next: (response) => {
-        this.idClienteParaAtualizar = response.id;
-        this.nomeCliente = response.nome;
-        this.emailCliente = response.email;
-        this.numeroCliente = response.numero;
+        this.idProdutoParaAtualizar = response.id;
+        this.nomeProduto = response.nome;
+        this.precoProduto = response.preco;
+        this.descricaoProduto = response.descricao;
         this.isEditMode = true;
       },
       error: (error) => {
-        alert(`Erro ao buscar o cliente para edição: ${error}`);
+        alert(
+          `Erro ao buscar o produto para edição: ${error}`,
+        );
       },
     });
   }
 
-  CadastrarCliente() {
-    const novoCliente = {
-      nome: this.nomeCliente,
-      email: this.emailCliente,
-      numero: this.numeroCliente,
-    };
-
-    this.http.post("http://localhost:3000/clientes", novoCliente).subscribe({
-      next: (response) => {
-        alert("Cliente cadastrado com sucesso!");
-        this.LimparFormulario();
-        this.BuscarClientes();
-      },
-      error: (error) => {
-        console.error("Erro ao cadastrar cliente:", error);
-        alert("Erro ao cadastrar cliente.");
-      },
-    });
-  }
-
-  SalvarAtualizacaoCliente() {
-    if (!this.idClienteParaAtualizar) {
-      alert("Nenhum cliente selecionado para atualização.");
+  CadastrarProduto() {
+    if (
+      !this.nomeProduto ||
+      this.precoProduto === null ||
+      !this.descricaoProduto
+    ) {
+      alert("Por favor, preencha todos os campos do produto.");
       return;
     }
 
-    const clienteAtualizado = {
-      id: this.idClienteParaAtualizar,
-      nome: this.nomeCliente,
-      email: this.emailCliente,
-      numero: this.numeroCliente,
+    const novoProduto = {
+      nome: this.nomeProduto,
+      preco: this.precoProduto,
+      descricao: this.descricaoProduto,
+    };
+
+    this.http.post("http://localhost:3000/produtos", novoProduto).subscribe({
+      next: (response) => {
+        alert("Produto cadastrado com sucesso!");
+        console.log("Produto cadastrado:", response);
+        this.LimparFormulario();
+        this.BuscarProdutos();
+      },
+      error: (error) => {
+        console.error("Erro ao cadastrar produto:", error);
+        alert("Erro ao cadastrar produto.");
+      },
+    });
+  }
+
+  SalvarAtualizacaoProduto() {
+    if (!this.idProdutoParaAtualizar) {
+      alert("Nenhum produto selecionado para atualização.");
+      return;
+    }
+
+    if (
+      !this.nomeProduto ||
+      this.precoProduto === null ||
+      !this.descricaoProduto
+    ) {
+      alert("Por favor, preencha todos os campos do produto.");
+      return;
+    }
+
+    const produtoAtualizado = {
+      id: this.idProdutoParaAtualizar,
+      nome: this.nomeProduto,
+      preco: this.precoProduto,
+      descricao: this.descricaoProduto,
     };
 
     this.http
       .post(
-        `http://localhost:3000/clientes/${this.idClienteParaAtualizar}`,
-        clienteAtualizado,
+        `http://localhost:3000/produtos/${this.idProdutoParaAtualizar}`,
+        produtoAtualizado,
       )
       .subscribe({
         next: (response) => {
-          alert("Cliente atualizado com sucesso!");
+          alert("Produto atualizado com sucesso!");
           this.LimparFormulario();
-          this.BuscarClientes();
+          this.BuscarProdutos();
         },
         error: (error) => {
-          console.error("Erro ao atualizar cliente:", error);
-          alert("Erro ao atualizar cliente.");
+          alert("Erro ao atualizar produto.");
         },
       });
   }
 
   LimparFormulario() {
-    this.idClienteParaAtualizar = null;
-    this.nomeCliente = "";
-    this.emailCliente = "";
-    this.numeroCliente = "";
+    this.idProdutoParaAtualizar = null;
+    this.nomeProduto = "";
+    this.precoProduto = null;
+    this.descricaoProduto = "";
     this.isEditMode = false;
   }
 
-  DeletarCliente(id: string) {
-    if (confirm(`Tem certeza que deseja excluir o cliente ${id}?`)) {
-      this.http.post(`http://localhost:3000/clientes/${id}`, {}).subscribe({
+  DeletarProduto(id: string) {
+    if (confirm(`Tem certeza que deseja excluir o produto com ID: ${id}?`)) {
+      this.http.post(`http://localhost:3000/produtos/deletar/${id}`, {}).subscribe({
         next: (response) => {
-          alert("Cliente excluído com sucesso!");
-          this.BuscarClientes();
+          alert("Produto excluído com sucesso!");
+          this.BuscarProdutos();
         },
         error: (error) => {
-          console.error("Erro ao excluir cliente:", error);
-          alert(`Erro ao excluir o cliente: ${error}`);
+          alert(`Erro ao excluir o produto: ${error}`);
         },
       });
     }
