@@ -42,10 +42,12 @@ backend/src/app.module.ts
 
 Altere os seguintes campos com as credenciais do seu banco local:
 
-username: 'SEU_USUARIO',
-password: 'SUA_SENHA',
-port: 5432, ou outra porta, caso tenha alterado
-database: 'NOME_DO_BANCO' o banco deve ser criado previamente
+```ts
+username: 'SEU_USUARIO'
+password: 'SUA_SENHA'
+port: 5432 // ou outra porta, caso tenha alterado
+database: 'NOME_DO_BANCO' // o banco deve ser criado previamente
+```
 
 ### 3. Inicie os servidores
 
