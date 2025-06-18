@@ -1,27 +1,36 @@
 <div class="body">
   <div class="header"></div>
   <div class="main">
-    <div class="title">
-      <p>Bem vindo!</p>
-    </div>
-    <div class="container-buttons">
-      <div>
-        <button type="button" routerLink="clientes">Cadastrar clientes</button>
-        <button type="button" routerLink="clientes">
-          Vizualizar clientes cadastrados
-        </button>
+    <div class="image-container"></div>
+    <div class="content-wrapper">
+      <div class="title">
+        <p>Bem vindo!</p>
       </div>
-      <div>
-        <button type="button" routerLink="produtos">Cadastrar produtos</button>
-        <button type="button" routerLink="produtos">
-          Vizualizar produtos cadastrados
-        </button>
-      </div>
-      <div>
-        <button type="button" routerLink="pedidos">Realizar pedidos</button>
-        <button type="button" routerLink="pedidos">
-          Vizualizar pedidos ativos
-        </button>
+      <div class="container-buttons">
+        <div>
+          <button type="button" routerLink="clientes/cadastrar">
+            Cadastrar clientes
+          </button>
+          <button type="button" routerLink="clientes/vizualizar">
+            Vizualizar clientes cadastrados
+          </button>
+        </div>
+        <div>
+          <button type="button" routerLink="produtos/cadastrar">
+            Cadastrar produtos
+          </button>
+          <button type="button" routerLink="produtos/vizualizar">
+            Vizualizar produtos cadastrados
+          </button>
+        </div>
+        <div>
+          <button type="button" routerLink="pedidos/cadastrar">
+            Realizar pedidos
+          </button>
+          <button type="button" routerLink="pedidos/ativos">
+            Vizualizar pedidos ativos
+          </button>
+        </div>
       </div>
     </div>
   </div>

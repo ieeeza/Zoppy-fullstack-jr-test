@@ -1,12 +1,13 @@
 :root {
-  --cor-fundo-main: #F9FAFB;
-  --cor-fundo-side-bar: #617a87;
-  --cor-padrao-texto: #1F2937;
-  --cor-padrao-botao: #10B981;
-  --cor-padrao-botao-hover: #10b981ab;
+  --cor-fundo-main: #f8f9fa;
+  --cor-fundo-side-bar: #495057;
+  --cor-padrao-texto: #212529;
+  --cor-padrao-botao: #20c997;
+  --cor-padrao-botao-hover: #18a77b;
+  --cor-bordar-bottom-header: #3498db;
 }
 
 * {
-	padding: 0px;
-	margin: 0px;
+  padding: 0px;
+  margin: 0px;
 }
