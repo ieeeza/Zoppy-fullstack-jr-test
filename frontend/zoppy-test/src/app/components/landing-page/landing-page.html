@@ -1,32 +1,29 @@
-<div
-	class="w-screen h-screen bg-black text-white flex flex-col items-center justify-center gap-10"
->
-	<div class="my-10">
-		<p class="text-4xl text-blue-500 text-center">Bem vindo!</p>
-	</div>
-	<div class="flex items-center gap-10">
-		<button
-			type="button"
-			routerLink="clientes"
-			class="w-20 h-50 bg-white text-black text-2xl p-6 w-80 rounded-xl hover:bg-gray-200 shadow-lg"
-		>
-			Ir para clientes
-		</button>
-
-		<button
-			type="button"
-			routerLink="produtos"
-			class="w-20 h-50 bg-white text-black text-2xl p-6 w-80 rounded-xl hover:bg-gray-200 shadow-lg"
-		>
-			Ir para produtos
-		</button>
-
-		<button
-			type="button"
-			routerLink="pedidos"
-			class="w-20 h-50 bg-white text-black text-2xl p-6 w-80 rounded-xl hover:bg-gray-200 shadow-lg"
-		>
-			Ir para pedidos
-		</button>
-	</div>
+<div class="body">
+  <div class="header"></div>
+  <div class="main">
+    <div class="title">
+      <p>Bem vindo!</p>
+    </div>
+    <div class="container-buttons">
+      <div>
+        <button type="button" routerLink="clientes">Cadastrar clientes</button>
+        <button type="button" routerLink="clientes">
+          Vizualizar clientes cadastrados
+        </button>
+      </div>
+      <div>
+        <button type="button" routerLink="produtos">Cadastrar produtos</button>
+        <button type="button" routerLink="produtos">
+          Vizualizar produtos cadastrados
+        </button>
+      </div>
+      <div>
+        <button type="button" routerLink="pedidos">Realizar pedidos</button>
+        <button type="button" routerLink="pedidos">
+          Vizualizar pedidos ativos
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="footer"></div>
 </div>

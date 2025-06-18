@@ -117,16 +117,18 @@ export class ClientesPage implements OnInit {
 
   DeletarCliente(id: string) {
     if (confirm(`Tem certeza que deseja excluir o cliente ${id}?`)) {
-      this.http.post(`http://localhost:3000/clientes/deletar/${id}`, {}).subscribe({
-        next: (response) => {
-          alert("Cliente excluído com sucesso!");
-          this.BuscarClientes();
-          this.LimparFormulario();
-        },
-        error: (error) => {
-          alert(`Erro ao excluir o cliente: ${error}`);
-        },
-      });
+      this.http
+        .post(`http://localhost:3000/clientes/deletar/${id}`, {})
+        .subscribe({
+          next: (response) => {
+            alert("Cliente excluído com sucesso!");
+            this.BuscarClientes();
+            this.LimparFormulario();
+          },
+          error: (error) => {
+            alert(`Erro ao excluir o cliente: ${error}`);
+          },
+        });
     }
   }
 }
