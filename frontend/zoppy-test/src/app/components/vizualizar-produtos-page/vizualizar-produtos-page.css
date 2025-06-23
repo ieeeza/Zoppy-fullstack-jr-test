@@ -1,0 +1,96 @@
+.body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--cor-fundo-side-bar);
+  height: 10vh;
+}
+
+.header button {
+  margin-left: 5px;
+  padding: 5px 10px 5px 10px;
+  cursor: pointer;
+}
+
+.header h2 {
+  color: var(--cor-padrao-texto);
+  text-align: center;
+  flex-grow: 1;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--cor-fundo-side-bar);
+  height: 10vh;
+}
+
+.footer button {
+  width: 15vw;
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.main {
+  height: 80vh;
+  background-color: var(--cor-fundo-main);
+  display: flex;
+  gap: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.container-list-clientes>div>p {
+  font-size: larger;
+}
+
+.list-clientes-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-editar {
+  background-color: #e5ff00a8;
+  width: 15vw;
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.button-editar:hover {
+  background-color: #e5ff00;
+}
+
+.button-excluir {
+  background-color: #ff0000a2;
+  width: 15vw;
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.button-excluir:hover {
+  background-color: #ff0000;
+}
+
+.button {
+  width: 15vw;
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+}

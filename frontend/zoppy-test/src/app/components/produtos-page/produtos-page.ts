@@ -69,7 +69,7 @@ export class ProdutosPage {
       error: (error) => {
         console.error("Error ao cadastrar o produto.", error);
         alert(`Erro ao cadastrar produto. ${error.error.message}`);
-      }
-    })
+      },
+    });
   }
 }
