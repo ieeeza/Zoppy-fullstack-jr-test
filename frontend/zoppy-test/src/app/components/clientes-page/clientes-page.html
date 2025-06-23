@@ -1,11 +1,10 @@
 <div class="body">
-  <header class="header"></header>
+  <header class="header">
+    <button type="button" title="voltar" routerLink="/">VOLTAR</button>
+    <h2>Cadastrar novo cliente</h2>
+  </header>
   <div class="main">
-    <div>
-      <button type="button" title="voltar" routerLink="/">VOLTAR</button>
-      <h2>Cadastrar novo cliente</h2>
-    </div>
-    <form class="form">
+    <div class="container-form">
       <div>
         <label for="nome">Nome:</label>
         <input
@@ -35,11 +34,14 @@
           name="numero"
         />
       </div>
+    </div>
 
-      <button type="submit" *ngIf="!isEditMode" (click)="CadastrarCliente()">
-        Cadastrar
-      </button>
-    </form>
+    <button type="button" (click)="CadastrarCliente()">
+      Cadastrar
+    </button>
+    <button type="button" routerLink="/clientes/vizualizar">
+      Vizualizar clientes
+    </button>
   </div>
   <footer class="footer"></footer>
 </div>

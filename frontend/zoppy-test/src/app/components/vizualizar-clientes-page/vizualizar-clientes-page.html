@@ -1,22 +1,21 @@
-<!-- <div>
-  <h2>Lista de Clientes</h2>
-  <ul>
-    <li *ngFor="let cliente of listaDeClientes">
-      <p>{{ cliente.nome }} ({{ cliente.email }})</p>
-      <button
-        type="button"
-        title="editarCliente"
-        (click)="AtualizarCliente(cliente.id)" >
-        Editar
-      </button>
-      <button
-        type="button"
-        title="deletarCliente"
-        (click)="DeletarCliente(cliente.id)"
-      >
-        Deletar
-      </button>
-    </li>
-  </ul>
-  <p *ngIf="listaDeClientes.length === 0">Nenhum cliente cadastrado.</p>
-</div> -->
+<div class="body">
+  <header class="header">
+    <button type="button" title="voltar" routerLink="/">VOLTAR</button>
+    <h2>Clientes cadastrados</h2>
+  </header>
+  <div class="main">
+    <div class="container-list-clientes">
+      <div *ngFor="let cliente of listaDeClientes">
+        <p>{{ cliente.nome }}</p>
+        <p>{{ cliente.email }}</p>
+        <p>{{ cliente.numero }}</p>
+        <button type="button" title="editarCliente">Editar</button>
+        <button type="button" title="excluirCliente">Excluir</button>
+      </div>
+    </div>
+    <button type="button" routerLink="/clientes/cadastrar">
+      Cadastrar cliente
+    </button>
+  </div>
+  <footer class="footer"></footer>
+</div>

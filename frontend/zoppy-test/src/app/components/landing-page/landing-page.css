@@ -19,49 +19,44 @@
   height: 80vh;
   display: flex;
   align-items: center;
-}
-
-.image-container {
-  width: 50%;
-  height: 100%;
+  justify-content: flex-end;
+  background-image: url('../../../../public/backgorund-landing.png');
   background-size: cover;
   background-position: center;
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-  background-image: linear-gradient(to right, rgba(248, 249, 250, 1) 0%, rgba(248, 249, 250, 0) 100%), url('../../../../public/backgorund-landing.png');
   background-repeat: no-repeat;
 }
-
 .content-wrapper {
-  width: 50%;
-  height: 100%;
+  width: 50vw;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 25px;
+  box-sizing: border-box;
 }
 
 .title p {
   font-size: 10em;
   margin: 0;
+  text-align: right;
+  white-space: nowrap;
 }
 
 .container-buttons {
   display: flex;
+  flex-direction: column;
+  gap: 20px;
   justify-content: center;
-  align-items: center;
-  gap: 5%;
-  width: 100%;
+  align-items: flex-end;
 }
 
 .container-buttons>div {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   gap: 5px;
-  width: auto;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .container-buttons div button {
