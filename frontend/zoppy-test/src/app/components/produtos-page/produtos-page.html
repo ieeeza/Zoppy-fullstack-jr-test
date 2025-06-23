@@ -6,7 +6,7 @@
   <div class="main">
     <div class="container-form">
       <div>
-        <label for="nomeProduto">Nome:</label>
+        <label for="nomeProduto">Nome do produto:</label>
         <input
           type="text"
           id="nomeProduto"
@@ -16,7 +16,7 @@
         />
       </div>
       <div>
-        <label for="descricaoProduto">Descrição:</label>
+        <label for="descricaoProduto">Descrição do produto:</label>
         <input
           type="text"
           id="descricaoProduto"
@@ -26,9 +26,9 @@
         />
       </div>
       <div>
-        <label for="precoProduto">Preço produto:</label>
+        <label for="precoProduto">Preço do produto:</label>
         <input
-          type="number"
+          type="text"
           id="precoProduto"
           [(ngModel)]="precoProduto"
           name="precoProduto"
@@ -36,12 +36,11 @@
       </div>
     </div>
 
-    <button type="button">
-      Cadastrar
-    </button>
+    <button type="button">Cadastrar</button>
+  </div>
+  <footer class="footer">
     <button type="button" routerLink="/produtos/vizualizar">
       Vizualizar produtos
     </button>
-  </div>
-  <footer class="footer"></footer>
+  </footer>
 </div>
