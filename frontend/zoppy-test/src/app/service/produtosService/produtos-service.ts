@@ -2,12 +2,14 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
-interface Produtos {
+interface Produto {
   id: string;
   nome: string;
   descricao: string;
   preco: string;
 }
+
+type ProdutoInput = Omit<Produto, "id">;
 
 @Injectable({
   providedIn: "root",
@@ -17,16 +19,16 @@ export class ProdutosService {
 
   constructor(private readonly http: HttpClient) {}
 
-  cadastrarProdutos(Produtos: Produtos): Observable<Produtos> {
-    return this.http.post<Produtos>(this.apiUrlProdutos, Produtos);
+  cadastrarProdutos(Produto: ProdutoInput): Observable<Produto> {
+    return this.http.post<Produto>(this.apiUrlProdutos, Produto);
   }
 
-  getProdutoss(): Observable<Produtos[]> {
-    return this.http.get<Produtos[]>(this.apiUrlProdutos);
+  getProdutoss(): Observable<Produto[]> {
+    return this.http.get<Produto[]>(this.apiUrlProdutos);
   }
 
-  atualizarProdutos(id: string, Produtos: Produtos): Observable<Produtos> {
-    return this.http.post<Produtos>(`${this.apiUrlProdutos}/${id}`, Produtos);
+  atualizarProdutos(id: string, Produto: Produto): Observable<Produto> {
+    return this.http.post<Produto>(`${this.apiUrlProdutos}/${id}`, Produto);
   }
 
   deletarProdutos(id: string): Observable<void> {

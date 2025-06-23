@@ -79,7 +79,7 @@ export class ClientesPage {
       },
       error: (error) => {
         console.error("Error ao cadastrar cliente.", error);
-        alert("Erro ao cadastrar cliente!");
+        alert(`Erro ao cadastrar cliente!. ${error.error.message}`);
       },
     });
   }
