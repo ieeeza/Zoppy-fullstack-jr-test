@@ -1,196 +1,84 @@
-:host {
-  display: block;
-  padding: 20px;
-  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  color: #333;
-  background-color: #f8f8f8;
+.body {
+  width: 100vw;
+  height: 100vh;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #3498db;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
+  background-color: var(--cor-fundo-side-bar);
+  height: 10vh;
+}
+
+.header button {
+  margin-left: 5px;
+  padding: 5px 10px 5px 10px;
+  cursor: pointer;
 }
 
 .header h2 {
-  color: #2c3e50;
+  color: var(--cor-padrao-texto);
   text-align: center;
   flex-grow: 1;
-  margin: 0;
 }
 
-form {
-  background-color: #ffffff;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 20px auto;
-  display: grid;
-  gap: 15px;
+.footer {
+  height: 10vh;
+  background-color: var(--cor-fundo-side-bar);
 }
 
-form div {
+.main {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--cor-fundo-main);
+  gap: 20px;
+}
+
+.container-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 40vw;
+  gap: 10px;
+}
+
+.container-form div {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  width: 40vw;
 }
 
-label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #555;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="number"],
-input[type="date"],
-textarea,
-select {
+.container-form div input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
-  width: 100%;
   box-sizing: border-box;
+  width: 100%;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
+.container-form div input:focus {
   border-color: #3498db;
   box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
   outline: none;
 }
 
-textarea {
-  resize: vertical;
-  min-height: 80px;
-}
-
-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
+.main button {
+  width: 15vw;
+  padding: 10px;
+  background-color: var(--cor-padrao-botao);
+  border-radius: 10px;
+  outline: none;
+  box-shadow: none;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-right: 10px;
 }
 
-button[type="submit"] {
-  background-color: #28a745;
-  color: white;
-}
-
-button[type="submit"]:hover {
-  background-color: #218838;
-  transform: translateY(-2px);
-}
-
-button[type="button"]:not([title]) {
-  background-color: #007bff;
-  color: white;
-}
-
-button[type="button"]:not([title]):hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
-}
-
-button[title="editarProduto"] {
-  background-color: #ffc107;
-  color: #333;
-}
-
-button[title="editarProduto"]:hover {
-  background-color: #e0a800;
-  transform: translateY(-2px);
-}
-
-button[title="deletarProduto"] {
-  background-color: #dc3545;
-  color: white;
-}
-
-button[title="deletarProduto"]:hover {
-  background-color: #c82333;
-  transform: translateY(-2px);
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  max-width: 800px;
-  margin: 30px auto;
-}
-
-li {
-  background-color: #ffffff;
-  padding: 15px 20px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-/* li div {
-  flex-grow: 1;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 5px 15px;
-} */
-
-.h2 {
-  color: #2c3e50;
-  border-bottom: 2px solid #3498db;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-li div {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  gap: 10px;
-}
-
-li p {
-  margin: 0;
-  font-size: 15px;
-  color: #444;
-}
-
-li p strong {
-  color: #2c3e50;
-  margin-right: 5px;
-}
-
-li button {
-  align-self: flex-end;
-  margin-top: 10px;
-  margin-left: 5px;
-}
-
-p.ng-star-inserted {
-  text-align: center;
-  color: #777;
-  font-style: italic;
-  margin-top: 20px;
-}
-
-hr {
-  border: 0;
-  height: 1px;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
-  margin: 40px auto;
-  max-width: 600px;
+.main button:hover {
+  background-color: var(--cor-padrao-botao-hover);
 }

@@ -24,30 +24,73 @@
 }
 
 .footer {
-  height: 10vh;
-  background-color: var(--cor-fundo-side-bar);
-}
-
-.main {
-  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  background-color: var(--cor-fundo-main);
-  gap: 20px;
+  background-color: var(--cor-fundo-side-bar);
+  height: 10vh;
 }
 
-.main button {
+.footer button {
   width: 15vw;
   padding: 10px;
-  background-color: var(--cor-padrao-botao);
   border-radius: 10px;
   outline: none;
   box-shadow: none;
   cursor: pointer;
 }
 
-.main button:hover {
-  background-color: var(--cor-padrao-botao-hover);
+.main {
+  height: 80vh;
+  background-color: var(--cor-fundo-main);
+  display: flex;
+  gap: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.container-list-clientes>div>p {
+  font-size: larger;
+}
+
+.list-clientes-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-editar {
+  background-color: #e5ff00a8;
+  width: 15vw;
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.button-editar:hover {
+  background-color: #e5ff00;
+}
+
+.button-excluir {
+  background-color: #ff0000a2;
+  width: 15vw;
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.button-excluir:hover {
+  background-color: #ff0000;
+}
+
+.button {
+  width: 15vw;
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
 }

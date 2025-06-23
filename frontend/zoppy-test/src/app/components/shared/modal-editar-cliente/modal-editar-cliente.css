@@ -1,0 +1,48 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--cor-fundo-main);
+  border-radius: 8px;
+  width: 21vw;
+  padding: 10px;
+}
+
+.modal-box input {
+  width: 20vw;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.botoes {
+  display: flex;
+  justify-content: space-between;
+}
+
+.botoes button:first-child {
+  background-color: #f44336;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.botoes button:last-child {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}

@@ -1,15 +1,17 @@
 import { Component } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { RouterLink } from "@angular/router";
+import { ClientesService } from "../../service/clientesService/clientes-service";
 
 interface Cliente {
-  id: string;
+  id?: string;
   nome: string;
   email: string;
   numero: string;
 }
+
+type ClienteInput = Omit<Cliente, "id">;
 
 @Component({
   selector: "app-clientes-page",
@@ -19,36 +21,65 @@ interface Cliente {
   styleUrls: ["./clientes-page.css"],
 })
 export class ClientesPage {
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly clientesService: ClientesService) {}
 
-  listaDeClientes: Cliente[] = [];
-  idClienteParaAtualizar: string | null = null;
   emailCliente: string = "";
   nomeCliente: string = "";
   numeroCliente: string = "";
 
-  LimparFormulario() {
-    this.idClienteParaAtualizar = null;
+  limparFormulario() {
     this.nomeCliente = "";
     this.emailCliente = "";
     this.numeroCliente = "";
   }
 
-  CadastrarCliente() {
-    const novoCliente = {
+  verificarInputs(): boolean {
+    const inputsFormatado: Cliente = {
+      nome: this.nomeCliente.trim(),
+      email: this.emailCliente.trim(),
+      numero: this.numeroCliente.trim(),
+    };
+
+    if (
+      !inputsFormatado.nome ||
+      !inputsFormatado.email ||
+      !inputsFormatado.numero
+    ) {
+      alert("Preencha todos os campos, por favor!");
+      return false;
+    } else if (inputsFormatado.nome.length < 10) {
+      alert("Digite o nome completo");
+      return false;
+    } else if (
+      !inputsFormatado.email.includes("@") ||
+      !inputsFormatado.email.includes(".com")
+    ) {
+      alert("Digite um email válido!");
+      return false;
+    }
+
+    return true;
+  }
+
+  cadastrarCliente(): void {
+    const novoCliente: ClienteInput = {
       nome: this.nomeCliente,
       email: this.emailCliente,
       numero: this.numeroCliente,
     };
 
-    this.http.post("http://localhost:3000/clientes", novoCliente).subscribe({
-      next: (response) => {
+    if (!this.verificarInputs()) {
+      return;
+    }
+
+    this.clientesService.cadastrarCliente(novoCliente).subscribe({
+      next: () => {
         alert("Cliente cadastrado com sucesso!");
-        this.LimparFormulario();
+        this.limparFormulario();
       },
       error: (error) => {
-        console.error("Erro ao cadastrar cliente:", error);
-        alert("Erro ao cadastrar cliente.");
+        console.error("Error ao cadastrar cliente.", error);
+        alert("Erro ao cadastrar cliente!");
       },
     });
   }

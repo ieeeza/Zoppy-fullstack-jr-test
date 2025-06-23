@@ -23,11 +23,6 @@
   flex-grow: 1;
 }
 
-.footer {
-  height: 10vh;
-  background-color: var(--cor-fundo-side-bar);
-}
-
 .main {
   height: 80vh;
   display: flex;
@@ -81,4 +76,21 @@
 
 .main button:hover {
   background-color: var(--cor-padrao-botao-hover);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--cor-fundo-side-bar);
+  height: 10vh;
+}
+
+.footer button {
+  width: 15vw;
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
 }

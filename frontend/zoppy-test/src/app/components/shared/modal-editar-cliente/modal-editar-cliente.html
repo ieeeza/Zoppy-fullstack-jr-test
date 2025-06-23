@@ -1,0 +1,19 @@
+<div class="modal-overlay" *ngIf="mostrar">
+  <div class="modal-box">
+    <h2>Editar Funcionário</h2>
+
+    <label for="nome">Nome</label>
+    <input title="nome" type="text" [(ngModel)]="nome" />
+
+    <label for="email">Email</label>
+    <input title="email" type="email" [(ngModel)]="email" />
+
+    <label for="numero">Número</label>
+    <input title="numero" type="text" [(ngModel)]="numero" />
+
+    <div class="botoes">
+      <button type="button" (click)="fecharModal()">Cancelar</button>
+      <button type="button" (click)="salvarEdicao()">Salvar</button>
+    </div>
+  </div>
+</div>

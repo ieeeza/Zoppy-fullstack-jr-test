@@ -1,80 +1,47 @@
-<div>
-  <div class="header">
+<div class="body">
+  <header class="header">
     <button type="button" title="voltar" routerLink="/">VOLTAR</button>
-    <h2>{{ isEditMode ? 'Editar produto' : 'Cadastrar novo produto' }}</h2>
-  </div>
-  <form>
-    <div>
-      <label for="nome">Nome do produto:</label>
-      <input
-        type="text"
-        id="nome"
-        [(ngModel)]="nomeProduto"
-        name="nome"
-        required
-      />
-    </div>
-    <div>
-      <label for="descricao">Descrição do produto:</label>
-      <input
-        type="text"
-        id="descricao"
-        [(ngModel)]="descricaoProduto"
-        name="descricao"
-        required
-      />
-    </div>
-    <div>
-      <label for="preco">Preço:</label>
-      <input type="text" id="preco" [(ngModel)]="precoProduto" name="preco" />
+    <h2>Cadastrar novo produto</h2>
+  </header>
+  <div class="main">
+    <div class="container-form">
+      <div>
+        <label for="nomeProduto">Nome:</label>
+        <input
+          type="text"
+          id="nomeProduto"
+          [(ngModel)]="nomeProduto"
+          name="nomeProduto"
+          required
+        />
+      </div>
+      <div>
+        <label for="descricaoProduto">Descrição:</label>
+        <input
+          type="text"
+          id="descricaoProduto"
+          [(ngModel)]="descricaoProduto"
+          name="descricaoProduto"
+          required
+        />
+      </div>
+      <div>
+        <label for="precoProduto">Preço produto:</label>
+        <input
+          type="number"
+          id="precoProduto"
+          [(ngModel)]="precoProduto"
+          name="precoProduto"
+        />
+      </div>
     </div>
 
-    <button type="submit" *ngIf="!isEditMode" (click)="CadastrarProduto()">
+    <button type="button">
       Cadastrar
     </button>
-    <button
-      type="button"
-      *ngIf="isEditMode"
-      (click)="SalvarAtualizacaoProduto()"
-    >
-      Salvar Alterações
+    <button type="button" routerLink="/produtos/vizualizar">
+      Vizualizar produtos
     </button>
-    <button type="button" *ngIf="isEditMode" (click)="LimparFormulario()">
-      Cancelar Edição
-    </button>
-  </form>
-</div>
-
-<hr />
-
-<div>
-  <h2 class="h2">Lista de Produtos</h2>
-  <ul>
-    <li *ngFor="let produto of listaDeProdutos">
-      <div>
-        <div>
-          <p>NOME: {{ produto.nome }}</p>
-          <p>PREÇO: {{ produto.preco }}</p>
-          <p>DESCRIÇÃO: {{ produto.descricao }}</p>
-        </div>
-        <div>
-          <button
-            type="button"
-            title="editarProduto"
-            (click)="CarregarProdutoParaEdicao(produto.id)"
-          >
-            Editar
-          </button>
-          <button
-            type="button"
-            title="deletarProduto"
-            (click)="DeletarProduto(produto.id)"
-          >
-            Deletar
-          </button>
-        </div>
-      </div>
-    </li>
-  </ul>
-  <p *ngIf="listaDeProdutos.length === 0">Nenhum produto cadastrado.</p>
+  </div>
+  <footer class="footer"></footer>
 </div>

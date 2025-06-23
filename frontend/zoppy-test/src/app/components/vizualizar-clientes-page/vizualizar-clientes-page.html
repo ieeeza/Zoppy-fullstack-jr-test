@@ -4,18 +4,55 @@
     <h2>Clientes cadastrados</h2>
   </header>
   <div class="main">
-    <div class="container-list-clientes">
-      <div *ngFor="let cliente of listaDeClientes">
+    <div
+      class="container-list-clientes"
+      *ngFor="let cliente of listaDeClientes"
+    >
+      <div>
+        <p>Nome completo:</p>
         <p>{{ cliente.nome }}</p>
+      </div>
+      <div>
+        <p>Email:</p>
         <p>{{ cliente.email }}</p>
+      </div>
+      <div>
+        <p>Numero:</p>
         <p>{{ cliente.numero }}</p>
-        <button type="button" title="editarCliente">Editar</button>
-        <button type="button" title="excluirCliente">Excluir</button>
+      </div>
+      <div class="list-clientes-buttons">
+        <button
+          class="button-editar"
+          type="button"
+          title="editarCliente"
+          (click)="abrirModalEditar(cliente)"
+        >
+          Editar
+        </button>
+        <button
+          class="button-excluir"
+          type="button"
+          title="excluirCliente"
+          (click)="deletarClientes(cliente.id)"
+        >
+          Excluir
+        </button>
       </div>
     </div>
-    <button type="button" routerLink="/clientes/cadastrar">
+  </div>
+  <footer class="footer">
+    <button class="button" type="button" routerLink="/clientes/cadastrar">
       Cadastrar cliente
     </button>
-  </div>
-  <footer class="footer"></footer>
+  </footer>
 </div>
+
+<app-modal-editar
+  [mostrar]="mostrarModalEditar"
+  [nome]="clienteSelecionado.nome"
+  [email]="clienteSelecionado.email"
+  [numero]="clienteSelecionado.numero"
+  (salvar)="salvarModal($event)"
+  (fechar)="mostrarModalEditar = false"
+>
+</app-modal-editar>

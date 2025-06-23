@@ -9,6 +9,8 @@ interface Cliente {
   numero: string;
 }
 
+type ClienteInput = Omit<Cliente, "id">;
+
 @Injectable({
   providedIn: "root",
 })
@@ -17,7 +19,7 @@ export class ClientesService {
 
   constructor(private readonly http: HttpClient) {}
 
-  cadastrarCliente(cliente: Cliente): Observable<Cliente> {
+  cadastrarCliente(cliente: ClienteInput): Observable<Cliente> {
     return this.http.post<Cliente>(this.apiUrlClientes, cliente);
   }
 
@@ -25,11 +27,11 @@ export class ClientesService {
     return this.http.get<Cliente[]>(this.apiUrlClientes);
   }
 
-  atualizarCliente(id: number, cliente: Cliente): Observable<Cliente> {
-    return this.http.put<Cliente>(`${this.apiUrlClientes}/${id}`, cliente);
+  atualizarCliente(id: string, cliente: Cliente): Observable<Cliente> {
+    return this.http.post<Cliente>(`${this.apiUrlClientes}/${id}`, cliente);
   }
 
-  deletarCliente(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrlClientes}/${id}`);
+  deletarCliente(id: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrlClientes}/deletar/${id}`, {});
   }
 }
