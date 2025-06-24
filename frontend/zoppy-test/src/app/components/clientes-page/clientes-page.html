@@ -26,12 +26,15 @@
         />
       </div>
       <div>
-        <label for="numero">Número de telefone:</label>
+        <label for="numeroCliente">Número de telefone:</label>
         <input
+          title="numeroCliente"
           type="text"
-          id="numero"
+          inputmode="numeric"
+          pattern="[0-9]*"
           [(ngModel)]="numeroCliente"
-          name="numero"
+          (keypress)="permitirNumeros($event)"
+          (paste)="bloquearTextoInvalido($event)"
         />
       </div>
     </div>

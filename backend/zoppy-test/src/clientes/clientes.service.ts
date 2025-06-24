@@ -1,12 +1,13 @@
 import {
   ConflictException,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
 } from "@nestjs/common";
 import { Cliente } from "src/entities/cliente.entity";
 import { CriarClienteDto } from "src/dtos/clientesDto/criar-cliente.dto";
 import { AtualizarClienteDto } from "src/dtos/clientesDto/atualizar-cliente.dto";
-import { Repository } from "typeorm";
+import { QueryFailedError, Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 
 @Injectable()
@@ -68,11 +69,26 @@ export class ClientesService {
   }
 
   async apagarCliente(id: string): Promise<void> {
-    const cliente = await this.clienteRepository.findOne({ where: { id } });
+    try {
+      const clienteToDelete = await this.clienteRepository.findOne({
+        where: { id },
+      });
+      if (!clienteToDelete) {
+        throw new NotFoundException(`Cliente com ID ${id} não encontrado.`);
+      }
 
-    if (!cliente)
-      throw new NotFoundException(`Cliente com id "${id}" não encontrado`);
-
-    await this.clienteRepository.remove(cliente);
+      await this.clienteRepository.delete(id);
+    } catch (error) {
+      if (error instanceof QueryFailedError) {
+        if (error["code"] === "23503") {
+          throw new ConflictException(
+            "Não foi possível excluir o cliente. Existem pedidos associados a este cliente. Por favor, exclua os pedidos primeiro ou associe-os a outro cliente.",
+          );
+        }
+      }
+      throw new InternalServerErrorException(
+        "Ocorreu um erro interno ao tentar excluir o cliente.",
+      );
+    }
   }
 }

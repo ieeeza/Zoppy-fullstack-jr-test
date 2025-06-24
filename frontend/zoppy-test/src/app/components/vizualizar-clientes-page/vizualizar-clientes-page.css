@@ -49,6 +49,13 @@
   padding-right: 5px;
 }
 
+.container-list-clientes>div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
 .container-list-clientes>div>p {
   font-size: larger;
 }

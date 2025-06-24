@@ -18,19 +18,38 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    # REMOVIDO: network_mode: "host"
     environment:
       - NODE_ENV=production
       - PORT=3000
       - DATABASE_TYPE=postgres
-      - DATABASE_HOST=host.docker.internal
+      - DATABASE_HOST=db
       - DATABASE_PORT=5432
       - DATABASE_USERNAME=postgres
       - DATABASE_PASSWORD=Cesar1234.
       - DATABASE_NAME=zoppy
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Cesar1234.
+      POSTGRES_DB: zoppy
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - app-network
 
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local

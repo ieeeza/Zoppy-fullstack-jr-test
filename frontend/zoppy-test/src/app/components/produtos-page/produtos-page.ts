@@ -50,6 +50,22 @@ export class ProdutosPage {
     return true;
   }
 
+  permitirNumerosEPontoVirgula(event: KeyboardEvent) {
+    const char = event.key;
+
+    if (!/^[0-9.,]$/.test(char)) {
+      event.preventDefault();
+    }
+  }
+
+  bloquearTextoInvalido(event: ClipboardEvent) {
+    const texto = event.clipboardData?.getData("text") ?? "";
+
+    if (!/^[0-9.,]*$/.test(texto)) {
+      event.preventDefault();
+    }
+  }
+
   cadastrarProduto(): void {
     const novoProduto: Produto = {
       nome: this.nomeProduto,

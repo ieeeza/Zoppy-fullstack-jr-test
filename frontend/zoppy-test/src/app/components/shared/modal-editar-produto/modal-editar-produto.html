@@ -1,1 +1,27 @@
-<p>modal-editar-produto works!</p>
+<div class="modal-overlay" *ngIf="mostrar">
+  <div class="modal-box">
+    <h2>Editar produto</h2>
+
+    <label for="nome">Nome</label>
+    <input title="nome" type="text" [(ngModel)]="nome" />
+
+    <label for="descricao">Descrição do produto:</label>
+    <input title="descricao" type="text" [(ngModel)]="descricao" />
+
+    <label for="preco">Preço do produto:</label>
+    <input
+      title="preco"
+      type="text"
+      inputmode="numeric"
+      pattern="[0-9]*"
+      [(ngModel)]="preco"
+      (keypress)="permitirNumerosEPontoVirgula($event)"
+      (paste)="bloquearTextoInvalido($event)"
+    />
+
+    <div class="botoes">
+      <button type="button" (click)="fecharModal()">Cancelar</button>
+      <button type="button" (click)="salvarEdicao()">Salvar</button>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,10 @@
 import { IsNotEmpty, IsString } from "class-validator";
 
 export class CriarPedidoDto {
-  @IsNotEmpty({ message: "Email não encontrado, por favor relogue!" })
-  ClienteEmail: string;
+  @IsNotEmpty({ message: "Cliente não encontrado, por favor relogue!" })
+  clienteId: string;
 
-  @IsNotEmpty({ message: "Digite um email para o cliente!" })
+  @IsNotEmpty({ message: "Informe um produto para o cliente!" })
   produto: string;
 
   @IsString({ message: "Tipo de dado inválido!" })

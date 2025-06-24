@@ -61,6 +61,22 @@ export class ClientesPage {
     return true;
   }
 
+  permitirNumeros(event: KeyboardEvent) {
+    const char = event.key;
+
+    if (!/^\d$/.test(char)) {
+      event.preventDefault();
+    }
+  }
+
+  bloquearTextoInvalido(event: ClipboardEvent) {
+    const texto = event.clipboardData?.getData("text") ?? "";
+
+    if (!/^\d*$/.test(texto)) {
+      event.preventDefault();
+    }
+  }
+
   cadastrarCliente(): void {
     const novoCliente: ClienteInput = {
       nome: this.nomeCliente,

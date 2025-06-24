@@ -28,10 +28,13 @@
       <div>
         <label for="precoProduto">Preço do produto:</label>
         <input
+          title="precoProduto"
           type="text"
-          id="precoProduto"
+          inputmode="numeric"
+          pattern="[0-9]*"
           [(ngModel)]="precoProduto"
-          name="precoProduto"
+          (keypress)="permitirNumerosEPontoVirgula($event)"
+          (paste)="bloquearTextoInvalido($event)"
         />
       </div>
     </div>

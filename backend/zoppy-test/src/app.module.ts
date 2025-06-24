@@ -8,7 +8,7 @@ import { ProdutosModule } from "./produtos/produtos.module";
   imports: [
     TypeOrmModule.forRoot({
       type: "postgres",
-      host: "localhost",
+      host: "db",
       port: 5432,
       username: "postgres",
       password: "Cesar1234.",

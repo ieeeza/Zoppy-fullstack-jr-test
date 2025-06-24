@@ -14,14 +14,16 @@ export class PedidosService {
 
   async criarPedido(criarPedidoDto: CriarPedidoDto): Promise<Pedido> {
     const novoPedido = this.pedidoRepository.create({
-      ...criarPedidoDto,
+      produto: criarPedidoDto.produto,
+      descricao: criarPedidoDto.descricao,
+      cliente: { id: criarPedidoDto.clienteId },
     });
 
     return this.pedidoRepository.save(novoPedido);
   }
 
   async listarPedidos(): Promise<Pedido[]> {
-    return await this.pedidoRepository.find();
+    return await this.pedidoRepository.find({ relations: ["cliente"] });
   }
 
   async atualizarPedido(

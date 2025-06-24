@@ -1,16 +1,24 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from "typeorm";
+import { Cliente } from "./cliente.entity";
 
-@Entity("Pedidos")
+@Entity()
 export class Pedido {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ type: "varchar", length: 255, nullable: false })
-  clienteEmail: string;
-
-  @Column({ type: "varchar", length: 255, nullable: false })
+  @Column()
   produto: string;
 
-  @Column({ type: "text", nullable: true })
+  @Column()
   descricao: string;
+
+  @ManyToOne(() => Cliente, { eager: false })
+  @JoinColumn({ name: "clienteId" })
+  cliente: Cliente;
 }

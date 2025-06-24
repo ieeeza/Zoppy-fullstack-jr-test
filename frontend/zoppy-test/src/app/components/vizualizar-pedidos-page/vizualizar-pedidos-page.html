@@ -1,1 +1,37 @@
-<p>vizualizar-pedidos-page works!</p>
+<div class="body">
+  <header class="header">
+    <button type="button" title="voltar" routerLink="/">VOLTAR</button>
+    <h2>Pedidos cadastrados</h2>
+  </header>
+  <div class="main">
+    <div class="container-list-pedidos" *ngFor="let pedido of listaDePedidos">
+      <div>
+        <p>Nome:</p>
+        <p>{{ pedido.cliente.nome }}</p>
+      </div>
+      <div>
+        <p>produto:</p>
+        <p>{{ pedido.produto }}</p>
+      </div>
+      <div>
+        <p>Descrição do pedido:</p>
+        <p>{{ pedido.descricao }}</p>
+      </div>
+      <div class="list-pedidos-buttons">
+        <button
+          class="button-excluir"
+          type="button"
+          title="excluirPedido"
+          (click)="deletarPedido(pedido.id)"
+        >
+          Excluir
+        </button>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <button class="button" type="button" routerLink="/pedidos/cadastrar">
+      Cadastrar produto
+    </button>
+  </footer>
+</div>

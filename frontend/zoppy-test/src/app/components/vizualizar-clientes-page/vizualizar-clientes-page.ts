@@ -48,7 +48,7 @@ export class VizualizarClientesPage implements OnInit {
       },
       error: (error: any) => {
         console.error("Erro ao deletar cliente:", error);
-        alert(`Erro ao deletar cliente.`);
+        alert(`Erro ao deletar cliente. ${error.error.message}`);
       },
       complete: () => {
         this.buscarClientes();

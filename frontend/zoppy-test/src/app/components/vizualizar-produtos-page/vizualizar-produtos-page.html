@@ -1,30 +1,30 @@
 <div class="body">
   <header class="header">
     <button type="button" title="voltar" routerLink="/">VOLTAR</button>
-    <h2>Clientes cadastrados</h2>
+    <h2>Produtos cadastrados</h2>
   </header>
   <div class="main">
     <div
-      class="container-list-clientes"
+      class="container-list-produtos"
       *ngFor="let produto of listaDeProdutos"
     >
       <div>
-        <p>Nome completo:</p>
+        <p>Nome:</p>
         <p>{{ produto.nome }}</p>
       </div>
       <div>
-        <p>Email:</p>
+        <p>Descrição:</p>
         <p>{{ produto.descricao }}</p>
       </div>
       <div>
-        <p>Numero:</p>
+        <p>Preco:</p>
         <p>{{ produto.preco }}</p>
       </div>
-      <div class="list-clientes-buttons">
+      <div class="list-produtos-buttons">
         <button
           class="button-editar"
           type="button"
-          title="editarCliente"
+          title="editarProduto"
           (click)="abrirModalEditar(produto)"
         >
           Editar
@@ -32,7 +32,7 @@
         <button
           class="button-excluir"
           type="button"
-          title="excluirCliente"
+          title="excluirProduto"
           (click)="deletarProduto(produto.id)"
         >
           Excluir
@@ -41,18 +41,18 @@
     </div>
   </div>
   <footer class="footer">
-    <button class="button" type="button" routerLink="/clientes/cadastrar">
-      Cadastrar cliente
+    <button class="button" type="button" routerLink="/produtos/cadastrar">
+      Cadastrar produto
     </button>
   </footer>
 </div>
 
-<app-modal-editar
+<app-modal-editar-produto
   [mostrar]="mostrarModalEditar"
-  [nome]="clienteSelecionado.nome"
-  [email]="clienteSelecionado.email"
-  [numero]="clienteSelecionado.numero"
+  [nome]="produtoSelecionado.nome"
+  [descricao]="produtoSelecionado.descricao"
+  [preco]="produtoSelecionado.preco"
   (salvar)="salvarModal($event)"
   (fechar)="mostrarModalEditar = false"
 >
-</app-modal-editar>
+</app-modal-editar-produto>

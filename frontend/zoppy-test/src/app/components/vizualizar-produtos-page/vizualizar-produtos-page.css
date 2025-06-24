@@ -49,11 +49,17 @@
   padding-right: 5px;
 }
 
-.container-list-clientes>div>p {
+.container-list-produtos>div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.container-list-produtos>div>p {
   font-size: larger;
 }
 
-.list-clientes-buttons {
+.list-produtos-buttons {
   display: flex;
   flex-direction: column;
 }
